@@ -22,6 +22,7 @@ Route::get('/home', [HomeController::class, 'ingreso']);
 Route::get('/pqrs', [PQRController::class, 'vista']);
 Route::post('/pqrs', [PQRController::class, 'crear']);
 Route::get('/pqrs-oficinas', [PqrsOficinaController::class, 'oficinas']);
+Route::post('/pqrs-oficinas/crear', [PqrsOficinaController::class, 'crear']);
 
 Route::get('/clasificados', [ClasificadoController::class, 'vista']);
 Route::post('/clasificados', [ClasificadoController::class, 'crear']);
