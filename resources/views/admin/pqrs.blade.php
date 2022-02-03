@@ -1,10 +1,9 @@
- @extends('admin.app')
- @section('content')
- 
-    <div id="adminPqrs"></div>
-  
- @endsection
+@extends('admin.app')
 
- @push('js')
- <script src="{{ url('/js/admin/pqrs/main.js') }}"></script>	 
- @endpush
+@section('content')
+    <div id="adminPqrs"></div>
+@endsection
+
+@push('js')
+    <script src="{{ url('/js/admin/pqrs/main.js') }}"></script>
+@endpush
