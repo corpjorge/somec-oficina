@@ -18,31 +18,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div v-if="success.alertaCrearOficina" class="alert alert-success" role="alert">
-                            {{ success.alertaCrearOficina }}
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Correo</th>
                                     <th scope="col">Estado</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="oficina in oficinas">
-                                    <th scope="row">{{ oficina.id }}</th>
-                                    <td>{{ oficina.nombre }}</td>
-                                    <td>{{ oficina.correo }}</td>
-                                    <td v-if="oficina.estado === '1'">
-                                        <button class="btn btn-danger" @click="estadoOficina(oficina.id, 2)">
+                                <tr v-for="tipo in tipos">
+                                    <th scope="row">{{ tipo.id }}</th>
+                                    <td>{{ tipo.nombre }}</td>
+                                    <td v-if="tipo.estado === '1'">
+                                        <button class="btn btn-danger" @click="estadoTipo(tipo.id, 2)">
                                             Desactivar
                                         </button>
                                     </td>
                                     <td v-else>
-                                        <button class="btn btn-success" @click="estadoOficina(oficina.id, 1)">
+                                        <button class="btn btn-success" @click="estadoTipo(tipo.id, 1)">
                                             Activar
                                         </button>
                                     </td>
@@ -67,8 +62,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div v-if="success.alertaCrearOficina" class="alert alert-success" role="alert">
-                            {{ success.alertaCrearOficina }}
+                        <div v-if="success.alertaCrearTipo" class="alert alert-success" role="alert">
+                            {{ success.alertaCrearTipo }}
                         </div>
                         <form class="needs-validation" novalidate>
                             <div class="mb-3">
@@ -78,28 +73,16 @@
                                        aria-label="oficinas"
                                        aria-describedby="nombre"
                                        id="recipient-name"
-                                       v-model="oficina.nombre"
+                                       v-model="tipo.nombre"
                                        required
                                 >
                                 <div class="invalid-feedback">{{ errors.nombre ? errors.nombre : '' }}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="correo" class="col-form-label">Correo:</label>
-                                <input type="text" class="form-control form-control-sm "
-                                       :class="errors.correo ? 'is-invalid' : '' "
-                                       aria-label="correo"
-                                       aria-describedby="correo"
-                                       id="correo"
-                                       v-model="oficina.correo"
-                                       required
-                                >
-                                <div class="invalid-feedback">{{ errors.correo ? errors.correo : '' }}</div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" @click="crearOficina">Guardar</button>
+                        <button type="submit" class="btn btn-primary" @click="crearTipo">Guardar</button>
                     </div>
                 </div>
             </div>
@@ -244,11 +227,16 @@ export default {
             paginacion: {
                 prev_page_url: null,
                 next_page_url: null
-            }
+            },
+            tipos: {},
+            tipo: {},
+            errors: {},
+            success: {alertaCrearTipo: false}
         }
     },
     mounted() {
-        this.obtenerDatos()
+        this.obtenerDatos();
+        this.obtenerTipos();
     },
     methods: {
         async obtenerDatos() {
@@ -270,7 +258,32 @@ export default {
             await axios.delete('/admin/clasificados/eliminar/' + id).then(() => {
                 this.obtenerDatos();
             })
-        }
+        },
+        async obtenerTipos() {
+            await axios.get('/admin/clasificados-tipo').then(response => {
+                this.tipos = response.data;
+            })
+        },
+        estadoTipo(id, estado) {
+            axios.post('/admin/clasificados/estado', {id: id, estado: estado}).then(() => {
+                this.obtenerTipos();
+            })
+        },
+        crearTipo() {
+            this.success.alertaCrearTipo = false;
+
+            if (!this.tipo.nombre) {
+                return this.errors.nombre = "El nombre no puede estar vacío";
+            }
+
+            this.errors.nombre = false;
+
+            axios.post('/admin/clasificados-tipo/create', this.tipo).then(() => {
+                this.obtenerTipos();
+                this.tipo.nombre = '';
+                this.success.alertaCrearTipo = 'Guardado correctamente';
+            })
+        },
 
     }
 };

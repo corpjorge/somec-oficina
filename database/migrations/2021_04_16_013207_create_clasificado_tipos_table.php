@@ -16,6 +16,7 @@ class CreateClasificadoTiposTable extends Migration
         Schema::create('clasificado_tipos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }

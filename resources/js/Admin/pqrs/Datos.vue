@@ -18,9 +18,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div v-if="success.alertaCrearOficina" class="alert alert-success" role="alert">
-                            {{ success.alertaCrearOficina }}
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>

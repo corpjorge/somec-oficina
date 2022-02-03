@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/clasificados/activar/{id}', [AdminClasificadoController::class, 'activar']);
     Route::delete('/admin/clasificados/eliminar/{id}', [AdminClasificadoController::class, 'eliminar']);
 
+    Route::get('/admin/clasificados-tipo', [ClasificadoTipoController::class, 'todosTipos']);
+    Route::post('/admin/clasificados/estado', [ClasificadoTipoController::class, 'estado']);
+    Route::post('/admin/clasificados-tipo/create', [ClasificadoTipoController::class, 'crear']);
+
     Route::get('/admin/eventos', [AdminEventoController::class, 'vista']);
     Route::get('/admin/eventos/datos', [AdminEventoController::class, 'datos']);
     Route::get('/admin/eventos/inscritos/{evento}', [AdminEventoController::class, 'inscritos']);
