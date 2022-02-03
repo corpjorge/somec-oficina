@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PQRSCreado;
+use App\Models\PqrsOficina;
 use Illuminate\Http\Request;
 use App\Models\PQR;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 
 class PQRController extends Controller
 {
@@ -44,5 +47,7 @@ class PQRController extends Controller
         $pqr->archivo2 = $archivo2 ?? '';
         $pqr->save();
 
+        $oficina = PqrsOficina::where('nombre', $request->oficinas)->first();
+        Mail::to($request->user())->send(new PQRSCreado($oficina->correo));
     }
 }
