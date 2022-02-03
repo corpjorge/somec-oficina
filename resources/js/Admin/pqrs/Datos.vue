@@ -1,9 +1,61 @@
 <template>
     <div class="col-lg-12 mx-auto p-3 py-md-5">
         <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#listarOficinas">
+                Listar oficinas
+            </button>
             <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#crearOficinas">
                 Añadir oficinas
             </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="listarOficinas" tabindex="-1" aria-labelledby="listarOficinasLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="listarOficinasLabel">Añadir oficina</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div v-if="success.alertaCrearOficina" class="alert alert-success" role="alert">
+                            {{ success.alertaCrearOficina }}
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="oficina in oficinas">
+                                    <th scope="row">{{ oficina.id }}</th>
+                                    <td>{{ oficina.nombre }}</td>
+                                    <td>{{ oficina.correo }}</td>
+                                    <td v-if="oficina.estado === '1'">
+                                        <button class="btn btn-danger" @click="estadoOficina(oficina.id, 2)">
+                                            Desactivar
+                                        </button>
+                                    </td>
+                                    <td v-else>
+                                        <button class="btn btn-success" @click="estadoOficina(oficina.id, 1)">
+                                            Activar
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="crearOficinas" tabindex="-1" aria-labelledby="crearOficinasLabel"
@@ -164,7 +216,8 @@ export default {
         }
     },
     mounted() {
-        this.obtenerDatos()
+        this.obtenerDatos();
+        this.obtenerOficinas();
     },
     methods: {
         async obtenerDatos() {
@@ -199,11 +252,22 @@ export default {
             }
 
             axios.post('/pqrs-oficinas/crear', this.oficina).then(() => {
+                this.obtenerOficinas();
                 this.oficina.nombre = '';
                 this.oficina.correo = '';
                 this.success.alertaCrearOficina = 'Guardado correctamente';
             })
         },
+        async obtenerOficinas() {
+            await axios.get('/admin/pqrs/oficinas').then(response => {
+                this.oficinas = response.data;
+            })
+        },
+        estadoOficina(id, estado) {
+            axios.post('/admin/oficina/estado', {id: id, estado: estado}).then(() => {
+                this.obtenerOficinas();
+            })
+        }
 
     }
 };

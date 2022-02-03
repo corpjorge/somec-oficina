@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/pqrs/cerrar/{id}', [AdminPqrController::class, 'cerrar']);
     Route::post('/admin/pqrs/correo-cierre', [AdminPqrController::class, 'correoCierre']);
 
+    Route::get('/admin/pqrs/oficinas', [PqrsOficinaController::class, 'todasOficinas']);
+    Route::post('/admin/oficina/estado', [PqrsOficinaController::class, 'estado']);
+
     Route::get('/admin/clasificados', [AdminClasificadoController::class, 'vista']);
     Route::get('/admin/clasificados/datos', [AdminClasificadoController::class, 'datos']);
     Route::post('/admin/clasificados/activar/{id}', [AdminClasificadoController::class, 'activar']);
