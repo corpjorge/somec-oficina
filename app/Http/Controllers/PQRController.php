@@ -16,7 +16,7 @@ class PQRController extends Controller
 
     public function crear(Request $request, PQR $pqr)
     {
- 
+
         $request->validate([
             'nombre' => 'required',
             'cedula' => 'required|numeric|min:1',
@@ -25,22 +25,23 @@ class PQRController extends Controller
             'oficinas' => 'required',
             'tipo' => 'required',
             'descripcion' => 'required',
-            'archivo1' => 'required',
-            'archivo2' => 'required',
-        ]); 
- 
-        $archivo1 = $request->file('archivo1')->getClientOriginalName();
-        $archivo1 = \Str::random(3).$archivo1;
+        ]);
 
-        $archivo2 = $request->file('archivo2')->getClientOriginalName();
-        $archivo2 = \Str::random(3) . $archivo2;
+        if ($request->file('archivo1')) {
+            $archivo1 = $request->file('archivo1')->getClientOriginalName();
+            $archivo1 = \Str::random(3) . $archivo1;
+            Storage::putFileAs('public/pqrs', new File($request->archivo1), $archivo1);
+        }
 
-        Storage::putFileAs('public/pqrs', new File($request->archivo1), $archivo1);
-        Storage::putFileAs('public/pqrs', new File($request->archivo2), $archivo2); 
+        if ($request->file('archivo2')) {
+            $archivo2 = $request->file('archivo2')->getClientOriginalName();
+            $archivo2 = \Str::random(3) . $archivo2;
+            Storage::putFileAs('public/pqrs', new File($request->archivo2), $archivo2);
+        }
 
         $pqr->fill($request->all());
-        $pqr->archivo1 = $archivo1;
-        $pqr->archivo2 = $archivo2;
+        $pqr->archivo1 = $archivo1 ?? '';
+        $pqr->archivo2 = $archivo2 ?? '';
         $pqr->save();
 
     }

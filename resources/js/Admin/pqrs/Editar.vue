@@ -1,12 +1,12 @@
 <template>
   <div class="col-lg-12 mx-auto p-3 py-md-5">
-    <header class="d-flex align-items-center mb-2 border-bottom">   
-    <h3>PQRS</h3>     
-    </header>  
+    <header class="d-flex align-items-center mb-2 border-bottom">
+    <h3>PQRS</h3>
+    </header>
     <div class="row ">
-        <div v-if="enviando" class="fs-5 col-md-12 alert alert-success" role="alert">  
+        <div v-if="enviando" class="fs-5 col-md-12 alert alert-success" role="alert">
           Informacion actualizada
-        </div>  
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm">
@@ -16,14 +16,14 @@
                     <p><b>Correo:</b> {{datos.correo}}</p>
                 </div>
                 <div class="col-sm">
-                    <a :href="'/storage/pqrs/'+datos.archivo1" target="_blank" >Documento 1</a> / 
-                    <a :href="'/storage/pqrs/'+datos.archivo2" target="_blank" >Documento 2</a>
+                    <a v-if="datos.archivo1" :href="'/storage/pqrs/'+datos.archivo1" target="_blank" >Documento 1</a> /
+                    <a v-if="datos.archivo2" :href="'/storage/pqrs/'+datos.archivo2" target="_blank" >Documento 2</a>
                 </div>
                 <div class="col-sm">
                     <p><b>{{datos.tipo}}:</b> {{datos.descripcion}}</p>
                 </div>
             </div>
-        </div>  
+        </div>
 
         <hr>
 
@@ -42,11 +42,11 @@
 					<input type="file" class="form-control form-control-sm" :class="errors.archivo_antendido ? 'is-invalid' : '' " aria-label="file example"  @change="archivo1">
 					<div class="invalid-feedback">{{ errors.archivo_antendido ? errors.archivo_antendido[0] : ''}}</div>
 				</div>
-			</div> 	   
+			</div>
 
 			<div class="d-grid gap-2 col-6 mx-auto">
-				<button class="btn btn-primary" type="submit" >Guardar</button>		 
-			</div> 			 
+				<button class="btn btn-primary" type="submit" >Guardar</button>
+			</div>
 		</form>
 
         <template v-if="datos.estado" >
@@ -54,18 +54,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <p><b>Fecha atendido:</b> {{datos.fecha_atendido}}</p>                   
+                    <p><b>Fecha atendido:</b> {{datos.fecha_atendido}}</p>
                 </div>
                 <div class="col-sm">
-                    <a :href="'/storage/pqrs/respuestas/'+datos.archivo_antendido" target="_blank" >Archivo antendido </a>                   
+                    <a :href="'/storage/pqrs/respuestas/'+datos.archivo_antendido" target="_blank" >Archivo antendido </a>
                 </div>
                 <div class="col-sm">
                     <p><b>Respuesta (atención):</b> {{datos.observacion_antendido}}</p>
                 </div>
             </div>
-        </div> 
+        </div>
 
-        <hr> 
+        <hr>
 
         </template>
 
@@ -86,51 +86,51 @@
 					<input type="file" class="form-control form-control-sm" :class="errors.archivo_cierre ? 'is-invalid' : '' " aria-label="file example"  @change="archivo2">
 					<div class="invalid-feedback">{{ errors.archivo_cierre ? errors.archivo_cierre[0] : ''}}</div>
 				</div>
-			</div> 	   
+			</div>
 
 			<div class="d-grid gap-2 col-6 mx-auto">
-				<button class="btn btn-primary" type="submit" >Guardar</button>		 
-			</div> 			 
+				<button class="btn btn-primary" type="submit" >Guardar</button>
+			</div>
 		</form>
-        </template>  
+        </template>
 
         <template v-if="datos.estado == 'CERRADO'" >
 
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    <p><b>Fecha cierre:</b> {{datos.fecha_cierre}}</p>                   
+                    <p><b>Fecha cierre:</b> {{datos.fecha_cierre}}</p>
                 </div>
                 <div class="col-sm">
-                     <a :href="'/storage/pqrs/respuestas/'+datos.archivo_cierre" target="_blank" >Archivo cierre </a>                  
+                     <a :href="'/storage/pqrs/respuestas/'+datos.archivo_cierre" target="_blank" >Archivo cierre </a>
                 </div>
                 <div class="col-sm">
                     <p><b>Respuesta (Cierre):</b> {{datos.observacion_cierre}}</p>
                 </div>
             </div>
-        </div>   
-        </template> 
- 
-    </div> 
+        </div>
+        </template>
+
+    </div>
   </div>
 </template>
 
-<script> 
+<script>
 import axios from 'axios';
 
 export default {
     name: 'Datos',
 	data() {
-        return {           		
-          datos: {}, 
+        return {
+          datos: {},
           errors: {},
-		  enviando: null,         
+		  enviando: null,
         }
     },
 	mounted() {
-		this.obtenerDatos()  
+		this.obtenerDatos()
         window.scrollTo(0, 0);
-	},  
+	},
 	methods: {
         archivo1(event) {
 			this.datos.archivo_antendido = event.target.files[0];
@@ -138,23 +138,23 @@ export default {
         archivo2(event) {
 			this.datos.archivo_cierre = event.target.files[0];
 		},
-		async obtenerDatos(){ await axios.get('/admin/pqrs/editar/'+this.$route.params.id).then(response => { this.datos = response.data;}) },	
+		async obtenerDatos(){ await axios.get('/admin/pqrs/editar/'+this.$route.params.id).then(response => { this.datos = response.data;}) },
         async atender(){
 			const data = new FormData();
-            data.append('observacion_antendido', this.datos.observacion_antendido ? this.datos.observacion_antendido : '')    
-			data.append('archivo_antendido', this.datos.archivo_antendido ? this.datos.archivo_antendido : '') 
+            data.append('observacion_antendido', this.datos.observacion_antendido ? this.datos.observacion_antendido : '')
+			data.append('archivo_antendido', this.datos.archivo_antendido ? this.datos.archivo_antendido : '')
 			await axios.post('/admin/pqrs/atender/'+this.$route.params.id, data).then(() => { this.enviando = true; this.obtenerDatos(); }).catch(error => { this.errors = error.response.data.errors; })
-            
+
 		},
 
         async cerrar(){
-			const data = new FormData();		 		 
-			data.append('observacion_cierre', this.datos.observacion_cierre ? this.datos.observacion_cierre : '')  		 
-			data.append('archivo_cierre', this.datos.archivo_cierre ? this.datos.archivo_cierre : '') 
+			const data = new FormData();
+			data.append('observacion_cierre', this.datos.observacion_cierre ? this.datos.observacion_cierre : '')
+			data.append('archivo_cierre', this.datos.archivo_cierre ? this.datos.archivo_cierre : '')
 			await axios.post('/admin/pqrs/cerrar/'+this.$route.params.id, data).then(() => { this.enviando = true; this.obtenerDatos(); }).catch(error => { this.errors = error.response.data.errors; })
 		},
-        
-    
+
+
 	}
 };
 </script>
