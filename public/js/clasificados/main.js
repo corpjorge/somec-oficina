@@ -16609,7 +16609,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       clasificado: {},
       errors: {},
       enviando: null,
-      tipos: {}
+      tipos: {},
+      isDisabled: true
     };
   },
   created: function created() {
@@ -16682,6 +16683,47 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
           }
         }, _callee2);
       }))();
+    },
+    validarNombre: function validarNombre() {
+      var regex = /(\d+)/g;
+
+      if (this.clasificado.nombre.match(regex)) {
+        this.errors = {
+          nombre: {
+            0: 'El nombre no puede tener números'
+          }
+        };
+        return this.isDisabled = true;
+      }
+
+      this.errors = {
+        nombre: false
+      };
+      return this.isDisabled = false;
+    },
+    validarTelefono: function validarTelefono() {
+      if (isNaN(this.clasificado.celular)) {
+        this.errors = {
+          celular: {
+            0: 'El Celular solo puede ser numérico'
+          }
+        };
+        return this.isDisabled = true;
+      }
+
+      if (this.clasificado.celular.length !== 10) {
+        this.errors = {
+          celular: {
+            0: 'El celular debe contener 10 números'
+          }
+        };
+        return this.isDisabled = true;
+      }
+
+      this.errors = {
+        celular: false
+      };
+      return this.isDisabled = false;
     }
   }
 });
@@ -16886,23 +16928,16 @@ var _hoisted_42 = {
 var _hoisted_43 = {
   "class": "invalid-feedback"
 };
-
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_44 = {
   "class": "d-grid gap-2 col-6 mx-auto"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  "class": "btn btn-primary",
-  type: "submit"
-}, "Enviar")], -1
-/* HOISTED */
-);
-
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, !$data.enviando ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_3, "A través de este formulario podrá solicitar la publicación de sus anuncios, llene de forma correcta los datos a continuación y espere a que uno de nuestros funcionarios valide su información, si todo esta correcto se realizara la publicación de su clasificado.")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, " Su solicitud ha sido enviada. ")), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [!$data.enviando ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", {
     key: 0,
     "class": "needs-validation",
     autocomplete: "off",
     novalidate: "",
-    onSubmit: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.crearClasificado && $options.crearClasificado.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -16912,9 +16947,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-describedby": "nombre",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.clasificado.nombre = $event;
+    }),
+    onChange: _cache[2] || (_cache[2] = function () {
+      return $options.validarNombre && $options.validarNombre.apply($options, arguments);
     })
-  }, null, 2
-  /* CLASS */
+  }, null, 34
+  /* CLASS, HYDRATE_EVENTS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.clasificado.nombre]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.nombre ? $data.errors.nombre[0] : ''), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -16922,11 +16960,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": ["form-control form-control-sm", $data.errors.celular ? 'is-invalid' : ''],
     id: "celular",
     "aria-describedby": "celular",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.clasificado.celular = $event;
+    }),
+    onChange: _cache[4] || (_cache[4] = function () {
+      return $options.validarTelefono && $options.validarTelefono.apply($options, arguments);
     })
-  }, null, 2
-  /* CLASS */
+  }, null, 34
+  /* CLASS, HYDRATE_EVENTS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.clasificado.celular]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.celular ? $data.errors.celular[0] : ''), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -16934,7 +16975,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": ["form-control form-control-sm", $data.errors.correo ? 'is-invalid' : ''],
     id: "correo",
     "aria-describedby": "correo",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.clasificado.correo = $event;
     })
   }, null, 2
@@ -16944,7 +16985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     "class": ["form-select form-select-sm", $data.errors.tipo ? 'is-invalid' : ''],
     "aria-label": "oficinas",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.clasificado.tipo = $event;
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.tipos, function (tipo) {
@@ -16965,7 +17006,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": ["form-control form-control-sm", $data.errors.titulo ? 'is-invalid' : ''],
     id: "titulo",
     "aria-describedby": "titulo",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.clasificado.titulo = $event;
     })
   }, null, 2
@@ -16975,7 +17016,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
     "class": ["form-control form-control-sm", $data.errors.descripcion ? 'is-invalid' : ''],
     id: "descripcion",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.clasificado.descripcion = $event;
     })
   }, null, 2
@@ -16987,7 +17028,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     accept: ".jpg",
     "class": ["form-control form-control-sm", $data.errors.archivo1 ? 'is-invalid' : ''],
     "aria-label": "file example",
-    onChange: _cache[7] || (_cache[7] = function () {
+    onChange: _cache[9] || (_cache[9] = function () {
       return $options.archivo1 && $options.archivo1.apply($options, arguments);
     })
   }, null, 34
@@ -16999,7 +17040,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     accept: ".jpg",
     "class": ["form-control form-control-sm", $data.errors.archivo2 ? 'is-invalid' : ''],
     "aria-label": "file example",
-    onChange: _cache[8] || (_cache[8] = function () {
+    onChange: _cache[10] || (_cache[10] = function () {
       return $options.archivo2 && $options.archivo2.apply($options, arguments);
     })
   }, null, 34
@@ -17011,14 +17052,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     accept: ".jpg",
     "class": ["form-control form-control-sm", $data.errors.archivo3 ? 'is-invalid' : ''],
     "aria-label": "file example",
-    onChange: _cache[9] || (_cache[9] = function () {
+    onChange: _cache[11] || (_cache[11] = function () {
       return $options.archivo3 && $options.archivo3.apply($options, arguments);
     })
   }, null, 34
   /* CLASS, HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.archivo3 ? $data.errors.archivo3[0] : ''), 1
   /* TEXT */
-  )])]), _hoisted_44], 32
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn btn-primary",
+    type: "submit",
+    disabled: $data.isDisabled
+  }, "Enviar", 8
+  /* PROPS */
+  , ["disabled"])])], 32
   /* HYDRATE_EVENTS */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
 }

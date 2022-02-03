@@ -20,7 +20,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control form-control-sm"
                                    :class="errors.nombre ? 'is-invalid' : '' " id="nombre" aria-describedby="nombre"
-                                   v-model="clasificado.nombre">
+                                   v-model="clasificado.nombre"
+                                   @change="validarNombre"
+                            >
                             <div class="invalid-feedback">{{ errors.nombre ? errors.nombre[0] : '' }}</div>
                         </div>
                     </div>
@@ -30,7 +32,9 @@
                         <div class="col-sm-10">
                             <input type="number" class="form-control form-control-sm"
                                    :class="errors.celular ? 'is-invalid' : '' " id="celular" aria-describedby="celular"
-                                   v-model="clasificado.celular">
+                                   v-model="clasificado.celular"
+                                   @change="validarTelefono"
+                            >
                             <div class="invalid-feedback">{{ errors.celular ? errors.celular[0] : '' }}</div>
                         </div>
                     </div>
@@ -108,13 +112,11 @@
                     </div>
 
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <button class="btn btn-primary" type="submit" :disabled='isDisabled'>Enviar</button>
                     </div>
                 </form>
-
             </div>
         </div>
-
     </div>
 </template>
 
@@ -128,7 +130,8 @@ export default {
             clasificado: {},
             errors: {},
             enviando: null,
-            tipos: {}
+            tipos: {},
+            isDisabled: true
         }
     },
     created() {
@@ -169,7 +172,29 @@ export default {
             await axios.get('/clasificados-tipo').then(response => {
                 this.tipos = response.data;
             })
-        }
+        },
+        validarNombre() {
+            let regex = /(\d+)/g;
+            if (this.clasificado.nombre.match(regex)) {
+                this.errors = {nombre: {0: 'El nombre no puede tener números'}}
+                return this.isDisabled = true;
+            }
+            this.errors = {nombre: false}
+            return this.isDisabled = false;
+        },
+        validarTelefono() {
+            if (isNaN(this.clasificado.celular)) {
+                this.errors = {celular: {0: 'El Celular solo puede ser numérico'}}
+                return this.isDisabled = true
+            }
+            if (this.clasificado.celular.length !== 10) {
+                this.errors = {celular: {0: 'El celular debe contener 10 números'}}
+                return this.isDisabled = true
+            }
+
+            this.errors = {celular: false}
+            return this.isDisabled = false;
+        },
 
     }
 };
