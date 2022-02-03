@@ -16686,6 +16686,7 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
                 _context.next = 12;
                 return axios.post('/pqrs', data).then(function () {
                   _this.enviando = true;
+                  return _this.enviarCorreoPqrsCreado(data);
                 })["catch"](function (error) {
                   _this.errors = error.response.data.errors;
                 });
@@ -16697,6 +16698,9 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
           }
         }, _callee);
       }))();
+    },
+    enviarCorreoPqrsCreado: function enviarCorreoPqrsCreado(data) {
+      axios.post('/pqrs/correo', data);
     },
     pqrsOFicinas: function pqrsOFicinas() {
       var _this2 = this;

@@ -46,8 +46,13 @@ class PQRController extends Controller
         $pqr->archivo1 = $archivo1 ?? '';
         $pqr->archivo2 = $archivo2 ?? '';
         $pqr->save();
+    }
 
+    public function correo(Request $request)
+    {
         $oficina = PqrsOficina::where('nombre', $request->oficinas)->first();
         Mail::to($request->user())->send(new PQRSCreado($oficina->correo));
     }
+
+
 }

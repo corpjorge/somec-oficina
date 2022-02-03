@@ -190,9 +190,13 @@ export default {
 
             await axios.post('/pqrs', data).then(() => {
                 this.enviando = true;
+                return this.enviarCorreoPqrsCreado(data);
             }).catch(error => {
                 this.errors = error.response.data.errors;
             })
+        },
+        enviarCorreoPqrsCreado(data) {
+            axios.post('/pqrs/correo', data);
         },
         async pqrsOFicinas() {
             await axios.get('/pqrs-oficinas').then(response => {

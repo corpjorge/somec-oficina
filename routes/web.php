@@ -21,6 +21,7 @@ Route::get('/home', [HomeController::class, 'ingreso']);
 
 Route::get('/pqrs', [PQRController::class, 'vista']);
 Route::post('/pqrs', [PQRController::class, 'crear']);
+Route::post('/pqrs/correo', [PQRController::class, 'correo']);
 Route::get('/pqrs-oficinas', [PqrsOficinaController::class, 'oficinas']);
 Route::post('/pqrs-oficinas/crear', [PqrsOficinaController::class, 'crear']);
 
