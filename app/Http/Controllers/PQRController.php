@@ -51,7 +51,7 @@ class PQRController extends Controller
     public function correo(Request $request)
     {
         $oficina = PqrsOficina::where('nombre', $request->oficinas)->first();
-        Mail::to($request->user())->send(new PQRSCreado($oficina->correo));
+        Mail::to($oficina->correo)->send(new PQRSCreado());
     }
 
 
