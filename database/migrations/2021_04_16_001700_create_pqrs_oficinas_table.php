@@ -17,6 +17,7 @@ class CreatePqrsOficinasTable extends Migration
             $table->id();
             $table->string('nombre')->nullable();
             $table->string('correo')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }
