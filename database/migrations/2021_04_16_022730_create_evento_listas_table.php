@@ -16,6 +16,7 @@ class CreateEventoListasTable extends Migration
         Schema::create('evento_listas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->nullable();
+            $table->string('correo')->nullable();
             $table->timestamps();
         });
     }

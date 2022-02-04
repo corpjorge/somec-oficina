@@ -34,6 +34,7 @@ class AdminEventoController extends Controller
 
         $evento = new EventoLista;
         $evento->nombre = $request->nombre;
+        $evento->correo = $request->correo;
         $evento->save();
     }
 
