@@ -1,7 +1,11 @@
 @component('mail::message')
-# PQRS Actualizado
+# PQRS actualizado
 
-Se ha creado un PQRS
+Se ha actualizado tu PQRS
+
+**Observación:** {{ $respuesta }}<br>
+**Estado:** {{ $estado }}<br>
+**Documento**: <a href="{{config('app.url')}}/storage/pqrs/respuestas/{{ $documento }}">{{ $documento }}</a>
 
 Gracias,<br>
 @endcomponent
