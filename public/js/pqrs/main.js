@@ -16848,7 +16848,7 @@ var _hoisted_24 = {
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "oficinas",
   "class": "col-sm-1 col-form-label"
-}, "Oficinas:", -1
+}, "Oficina:", -1
 /* HOISTED */
 );
 
