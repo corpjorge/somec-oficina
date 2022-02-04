@@ -19,7 +19,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control form-control-sm"
                                    :class="errors.nombre ? 'is-invalid' : '' " id="nombre" aria-describedby="nombre"
-                                   v-model="evento.nombre">
+                                   v-model="evento.nombre"
+                                   @change="validarNombre"
+                            >
                             <div class="invalid-feedback">{{ errors.nombre ? errors.nombre[0] : '' }}</div>
                         </div>
                     </div>
@@ -27,7 +29,7 @@
                     <div class="mb-3 row">
                         <label for="cedula" class="col-sm-1 col-form-label">Cedula:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control form-control-sm"
+                            <input type="text" class="form-control form-control-sm"
                                    :class="errors.cedula ? 'is-invalid' : '' " id="cedula" aria-describedby="cedula"
                                    v-model="evento.cedula">
                             <div class="invalid-feedback">{{ errors.cedula ? errors.cedula[0] : '' }}</div>
@@ -39,7 +41,9 @@
                         <div class="col-sm-10">
                             <input type="number" class="form-control form-control-sm"
                                    :class="errors.celular ? 'is-invalid' : '' " id="celular" aria-describedby="celular"
-                                   v-model="evento.celular">
+                                   v-model="evento.celular"
+                                   @change="validarTelefono"
+                            >
                             <div class="invalid-feedback">{{ errors.celular ? errors.celular[0] : '' }}</div>
                         </div>
                     </div>
@@ -78,7 +82,7 @@
                     </div>
 
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <button class="btn btn-primary" type="submit" :disabled='isDisabled'>Enviar</button>
                     </div>
                 </form>
 
@@ -98,16 +102,40 @@ export default {
             evento: {},
             errors: {},
             enviando: null,
-            eventos: {}
+            eventos: {},
+            isDisabled: true
         }
     },
     created() {
         this.getEventos()
     },
     methods: {
+        validarNombre() {
+            let regex = /(\d+)/g;
+            if (this.evento.nombre.match(regex)) {
+                this.errors = {nombre: {0: 'El nombre no puede tener números'}}
+                return this.isDisabled = true;
+            }
+            this.errors = {nombre: false}
+            return this.isDisabled = false;
+        },
+        validarTelefono() {
+            if (isNaN(this.evento.celular)) {
+                this.errors = {celular: {0: 'El Celular solo puede ser numérico'}}
+                return this.isDisabled = true
+            }
+            if (this.evento.celular.length !== 10) {
+                this.errors = {celular: {0: 'El celular debe contener 10 números'}}
+                return this.isDisabled = true
+            }
+
+            this.errors = {celular: false}
+            return this.isDisabled = false;
+        },
         async crearEvento() {
             await axios.post('/eventos', this.evento).then(() => {
                 this.enviando = true;
+                return this.correoEvento(this.evento);
             }).catch(error => {
                 this.errors = error.response.data.errors;
             })
@@ -116,7 +144,10 @@ export default {
             await axios.get('/eventos-lista').then(response => {
                 this.eventos = response.data;
             })
-        }
+        },
+        correoEvento(evento) {
+            axios.post( '/eventos/correo', evento);
+        },
 
     }
 };

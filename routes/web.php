@@ -33,6 +33,7 @@ Route::get('/clasificado/{tipo}', [ClasificadoController::class, 'ListaClasifica
 
 Route::get('/eventos', [EventoController::class, 'vista']);
 Route::post('/eventos', [EventoController::class, 'crear']);
+Route::post('/eventos/correo', [EventoController::class, 'correo']);
 Route::get('/eventos-lista', [EventoListaController::class, 'lista']);
 
 Route::get('/departamentos-lista', [DepartamentoController::class, 'lista']);

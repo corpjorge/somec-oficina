@@ -26,7 +26,7 @@
                     <div class="mb-3 row">
                         <label for="cedula" class="col-sm-1 col-form-label">Cedula:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control form-control-sm"
+                            <input type="text" class="form-control form-control-sm"
                                    :class="errors.cedula ? 'is-invalid' : '' " id="cedula" aria-describedby="cedula"
                                    v-model="pqr.cedula"
                             >

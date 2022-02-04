@@ -1,7 +1,7 @@
 @component('mail::message')
-# PQRS Actualizado
+# Eventos
 
-Se ha creado un PQRS
+Se ha inscrito una nueva persona
 
 Gracias,<br>
 @endcomponent
