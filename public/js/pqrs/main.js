@@ -16848,7 +16848,7 @@ var _hoisted_24 = {
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "oficinas",
   "class": "col-sm-1 col-form-label"
-}, "Área:", -1
+}, "Oficinas:", -1
 /* HOISTED */
 );
 
@@ -17000,7 +17000,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-label": "oficinas",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.pqr.oficinas = $event;
-    })
+    }),
+    id: "oficinas"
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.oficinas, function (oficina) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("option", {
       key: oficina.id,

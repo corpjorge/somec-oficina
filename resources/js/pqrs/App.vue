@@ -57,10 +57,10 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="oficinas" class="col-sm-1 col-form-label">Área:</label>
+                        <label for="oficinas" class="col-sm-1 col-form-label">Oficinas:</label>
                         <div class="col-sm-10">
                             <select class="form-select form-select-sm" :class="errors.oficinas ? 'is-invalid' : '' "
-                                    aria-label="oficinas" v-model="pqr.oficinas">
+                                    aria-label="oficinas" v-model="pqr.oficinas" id="oficinas">
                                 <option v-for="oficina in oficinas" :key="oficina.id" :value="oficina.nombre">
                                     {{ oficina.nombre }}
                                 </option>
