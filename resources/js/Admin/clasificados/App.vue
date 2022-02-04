@@ -2,10 +2,10 @@
     <div class="col-lg-12 mx-auto p-3 py-md-5">
         <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#listarOficinas">
-                Listar oficinas
+                Listar tipos
             </button>
             <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#crearOficinas">
-                Añadir oficinas
+                Añadir tipo
             </button>
         </div>
         <!-- Modal -->

@@ -16786,12 +16786,12 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   "class": "btn btn-primary me-2",
   "data-bs-toggle": "modal",
   "data-bs-target": "#listarOficinas"
-}, " Listar oficinas "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+}, " Listar tipos "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "button",
   "class": "btn btn-primary ",
   "data-bs-toggle": "modal",
   "data-bs-target": "#crearOficinas"
-}, " Añadir oficinas ")], -1
+}, " Añadir tipo ")], -1
 /* HOISTED */
 );
 
