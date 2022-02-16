@@ -47,7 +47,9 @@
                     </thead>
                     <tbody>
                     <tr v-for="dato in datos" :key="dato.id">
-                        <td>{{ dato.nombre }}</td>
+                        <td>
+                            <input type="text" v-model="dato.nombre" @change="updateNameEvento(dato.id)">
+                        </td>
                         <td>
                             <button style="margin-right: 7px;" type="button" class="btn btn-danger btn-sm"
                                     data-bs-toggle="modal" :data-bs-target="'#eliminar'+dato.id">
@@ -205,6 +207,9 @@ export default {
             }).catch(error => {
                 this.errors = error.response.data.errors;
             })
+        },
+        updateNameEvento(id) {
+            axios.put("/admin/eventos/datos/"+id, { name: this.dato.name})
         }
     }
 };
