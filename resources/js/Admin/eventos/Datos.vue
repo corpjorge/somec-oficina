@@ -48,7 +48,17 @@
                     <tbody>
                     <tr v-for="dato in datos" :key="dato.id">
                         <td>
-                            <input type="text" v-model="dato.nombre" @change="updateNameEvento(dato.id)">
+                            <div class="row g-3">
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" v-model="dato.nombre"
+                                           @change="updateEvento(dato.id, dato.nombre)">
+
+                                </div>
+                                <div class="col-auto">
+                                    <input type="text" class="form-control" v-model="dato.correo"
+                                           @change="updateEvento(dato.id, null, dato.correo)">
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <button style="margin-right: 7px;" type="button" class="btn btn-danger btn-sm"
@@ -160,7 +170,8 @@ export default {
             paginacion: {
                 prev_page_url: null,
                 next_page_url: null
-            }
+            },
+            datoUpdate: {},
         }
     },
     mounted() {
@@ -208,8 +219,22 @@ export default {
                 this.errors = error.response.data.errors;
             })
         },
-        updateNameEvento(id) {
-            axios.put("/admin/eventos/datos/"+id, { name: this.dato.name})
+        updateEvento(id, nombre, correo) {
+            if (nombre) {
+                this.datoUpdate = {
+                    nombre: nombre
+                }
+            }
+
+            if (correo) {
+                this.datoUpdate = {
+                    correo: correo
+                }
+            }
+
+            axios.put('/admin/eventos/update/' + id, this.datoUpdate).then(() => {
+                this.obtenerDatos();
+            })
         }
     }
 };

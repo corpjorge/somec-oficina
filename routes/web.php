@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin/eventos', [AdminEventoController::class, 'vista']);
     Route::get('/admin/eventos/datos', [AdminEventoController::class, 'datos']);
-    Route::put('/admin/eventos/datos/{eventoLista}', [AdminEventoController::class, 'update']);
+    Route::put('/admin/eventos/update/{eventoLista}', [AdminEventoController::class, 'update']);
     Route::get('/admin/eventos/inscritos/{evento}', [AdminEventoController::class, 'inscritos']);
     Route::post('/admin/eventos/crear', [AdminEventoController::class, 'crear']);
     Route::delete('/admin/eventos/eliminar/{id}', [AdminEventoController::class, 'eliminar']);

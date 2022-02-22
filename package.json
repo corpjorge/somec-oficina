@@ -26,6 +26,7 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
+        "@ionic/vue": "^6.0.8",
         "vue-router": "^4.0.6"
     }
 }

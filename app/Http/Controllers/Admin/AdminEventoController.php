@@ -40,12 +40,8 @@ class AdminEventoController extends Controller
 
     public function update(Request $request, EventoLista $eventoLista)
     {
-
-        $evento->nombre = $request->nombre;
-        $evento->correo = $request->correo;
-        $evento->save();
+        $eventoLista->update($request->all());
     }
-
 
     public function eliminar($id)
     {
