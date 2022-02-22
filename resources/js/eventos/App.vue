@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="celular" class="col-sm-1 col-form-label">Celular:</label>
+                        <label for="celular" class="col-sm-1 col-form-label">Teléfono:</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control form-control-sm"
                                    :class="errors.celular ? 'is-invalid' : '' " id="celular" aria-describedby="celular"
@@ -124,8 +124,13 @@ export default {
                 this.errors = {celular: {0: 'El Celular solo puede ser numérico'}}
                 return this.isDisabled = true
             }
-            if (this.evento.celular.length !== 10) {
-                this.errors = {celular: {0: 'El celular debe contener 10 números'}}
+            if (this.evento.celular.length < 7 ) {
+                this.errors = {celular: {0: 'Numero incorrecto'}}
+                return this.isDisabled = true
+            }
+
+            if (this.evento.celular.length > 10 ) {
+                this.errors = {celular: {0: 'Numero incorrecto'}}
                 return this.isDisabled = true
             }
 

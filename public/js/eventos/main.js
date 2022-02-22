@@ -16644,10 +16644,19 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
         return this.isDisabled = true;
       }
 
-      if (this.evento.celular.length !== 10) {
+      if (this.evento.celular.length < 7) {
         this.errors = {
           celular: {
-            0: 'El celular debe contener 10 números'
+            0: 'Numero incorrecto'
+          }
+        };
+        return this.isDisabled = true;
+      }
+
+      if (this.evento.celular.length > 10) {
+        this.errors = {
+          celular: {
+            0: 'Numero incorrecto'
           }
         };
         return this.isDisabled = true;
@@ -16797,7 +16806,7 @@ var _hoisted_16 = {
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "celular",
   "class": "col-sm-1 col-form-label"
-}, "Celular:", -1
+}, "Teléfono:", -1
 /* HOISTED */
 );
 
