@@ -31,8 +31,14 @@
                                 <tbody>
                                 <tr v-for="oficina in oficinas">
                                     <th scope="row">{{ oficina.id }}</th>
-                                    <td>{{ oficina.nombre }}</td>
-                                    <td>{{ oficina.correo }}</td>
+                                    <td>
+                                        <input type="text" class="form-control" v-model="oficina.nombre"
+                                               @change="updateOficina(oficina.id, oficina.nombre)">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" v-model="oficina.correo"
+                                               @change="updateOficina(oficina.id, oficina.correo)">
+                                    </td>
                                     <td v-if="oficina.estado === '1'">
                                         <button class="btn btn-danger" @click="estadoOficina(oficina.id, 2)">
                                             Desactivar
@@ -209,7 +215,8 @@ export default {
             oficina: {},
             oficinas: {},
             errors: {},
-            success: {alertaCrearOficina: false}
+            success: {alertaCrearOficina: false},
+            datoUpdate: {},
         }
     },
     mounted() {
@@ -263,6 +270,23 @@ export default {
         estadoOficina(id, estado) {
             axios.post('/admin/oficina/estado', {id: id, estado: estado}).then(() => {
                 this.obtenerOficinas();
+            })
+        },
+        updateOficina(id, nombre, correo) {
+            if (nombre) {
+                this.datoUpdate = {
+                    nombre: nombre
+                }
+            }
+
+            if (correo) {
+                this.datoUpdate = {
+                    correo: correo
+                }
+            }
+
+            axios.put('/admin/oficina/update/' + id, this.datoUpdate).then(() => {
+                this.obtenerDatos();
             })
         }
 

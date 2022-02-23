@@ -32,4 +32,10 @@ class PqrsOficinaController extends Controller
         $oficina->estado = $request->estado;
         $oficina->save();
     }
+
+    public function update(Request $request, PqrsOficina $pqrsOficina)
+    {
+        $pqrsOficina->update($request->all());
+    }
+
 }

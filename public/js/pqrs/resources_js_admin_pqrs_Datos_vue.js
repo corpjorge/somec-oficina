@@ -1880,7 +1880,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       errors: {},
       success: {
         alertaCrearOficina: false
-      }
+      },
+      datoUpdate: {}
     };
   },
   mounted: function mounted() {
@@ -1990,6 +1991,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         estado: estado
       }).then(function () {
         _this5.obtenerOficinas();
+      });
+    },
+    updateOficina: function updateOficina(id, nombre, correo) {
+      var _this6 = this;
+
+      if (nombre) {
+        this.datoUpdate = {
+          nombre: nombre
+        };
+      }
+
+      if (correo) {
+        this.datoUpdate = {
+          correo: correo
+        };
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().put('/admin/oficina/update/' + id, this.datoUpdate).then(function () {
+        _this6.obtenerDatos();
       });
     }
   }
@@ -2252,11 +2272,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.oficinas, function (oficina) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(oficina.id), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(oficina.nombre), 1
-    /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(oficina.correo), 1
-    /* TEXT */
-    ), oficina.estado === '1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      type: "text",
+      "class": "form-control",
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return oficina.nombre = $event;
+      },
+      onChange: function onChange($event) {
+        return $options.updateOficina(oficina.id, oficina.nombre);
+      }
+    }, null, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , ["onUpdate:modelValue", "onChange"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, oficina.nombre]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      type: "text",
+      "class": "form-control",
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return oficina.correo = $event;
+      },
+      onChange: function onChange($event) {
+        return $options.updateOficina(oficina.id, oficina.correo);
+      }
+    }, null, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , ["onUpdate:modelValue", "onChange"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, oficina.correo]])]), oficina.estado === '1' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
         return $options.estadoOficina(oficina.id, 2);

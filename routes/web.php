@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin/pqrs/oficinas', [PqrsOficinaController::class, 'todasOficinas']);
     Route::post('/admin/oficina/estado', [PqrsOficinaController::class, 'estado']);
+    Route::put('/admin/oficina/update/{pqrsOficina}', [PqrsOficinaController::class, 'update']);
 
     Route::get('/admin/clasificados', [AdminClasificadoController::class, 'vista']);
     Route::get('/admin/clasificados/datos', [AdminClasificadoController::class, 'datos']);
