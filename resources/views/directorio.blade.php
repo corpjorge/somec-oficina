@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,13 +11,7 @@
     <title>Oficina</title>
 </head>
 <body>
-<div class="list-group">
-    <a type="button" href="{{ url('pqrs')}}" class="list-group-item list-group-item-action">Pqrs</a>
-    <a type="button" href="{{ url('eventos')}}" class="list-group-item list-group-item-action">Inscripción a eventos</a>
-    <a type="button" href="{{ url('clasificados')}}" class="list-group-item list-group-item-action">Clasificados</a>
-    <a type="button" href="{{ url('clasificado')}}" class="list-group-item list-group-item-action">Lista de
-        clasificados</a>
-    <a type="button" href="{{ url('directorio')}}" class="list-group-item list-group-item-action">Directorio</a>
-</div>
+<div id="clasificados"></div>
+<script src="/js/directorio/main.js"></script>
 </body>
 </html>

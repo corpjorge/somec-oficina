@@ -39,6 +39,9 @@ Route::get('/eventos-lista', [EventoListaController::class, 'lista']);
 Route::get('/departamentos-lista', [DepartamentoController::class, 'lista']);
 Route::get('/ciudades-lista/{id}', [MunicipioController::class, 'lista']);
 
+
+Route::get('/directorio', [ClasificadoController::class, 'vista']);
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/actualizacion', [ActualizacionController::class, 'vista']);
