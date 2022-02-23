@@ -2,10 +2,10 @@
     <div class="col-lg-12 mx-auto p-3 py-md-5">
         <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#listarOficinas">
-                Listar oficinas
+                Listar Áreas
             </button>
             <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#crearOficinas">
-                Añadir oficinas
+                Añadir Áreas
             </button>
         </div>
         <!-- Modal -->
@@ -118,6 +118,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Datos:</th>
+                        <th scope="col">Área</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Solicitado</th>
                         <th scope="col">Atendido</th>
@@ -129,6 +130,7 @@
                     <tr v-for="dato in datos" :key="dato.id">
                         <th scope="row">{{ dato.id }}</th>
                         <td>{{ dato.nombre }}</td>
+                        <td>{{ dato.oficinas }}</td>
                         <td>{{ dato.estado ? dato.estado : 'Sin atender' }}</td>
                         <td>{{ dato.created_at }}</td>
                         <td>{{ dato.fecha_atendido }}</td>
