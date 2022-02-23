@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDirectorioController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DirectorioController;
 use App\Http\Controllers\MunicipioController;
@@ -76,5 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/eventos/inscritos/{evento}', [AdminEventoController::class, 'inscritos']);
     Route::post('/admin/eventos/crear', [AdminEventoController::class, 'crear']);
     Route::delete('/admin/eventos/eliminar/{id}', [AdminEventoController::class, 'eliminar']);
+
+    Route::get('/admin/directorio', [AdminDirectorioController::class, 'vista']);
 
 });

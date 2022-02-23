@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ url('admin/eventos') }}">Eventos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url('admin/directorio') }}">Directorio</a>
+                </li>
             </ul>
             <form class="d-flex" method="POST" action="{{ route('logout') }}">
                 @csrf

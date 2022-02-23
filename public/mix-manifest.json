@@ -8,5 +8,6 @@
     "/js/directorioLista/main.js": "/js/directorioLista/main.js",
     "/js/admin/pqrs/main.js": "/js/admin/pqrs/main.js",
     "/js/admin/clasificados/main.js": "/js/admin/clasificados/main.js",
-    "/js/admin/eventos/main.js": "/js/admin/eventos/main.js"
+    "/js/admin/eventos/main.js": "/js/admin/eventos/main.js",
+    "/js/admin/directorio/main.js": "/js/admin/directorio/main.js"
 }

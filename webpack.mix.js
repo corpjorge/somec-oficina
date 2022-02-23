@@ -11,4 +11,5 @@ mix
     .js('resources/js/admin/pqrs/main.js', 'public/js/admin/pqrs').vue()
     .js('resources/js/admin/clasificados/main.js', 'public/js/admin/clasificados').vue()
     .js('resources/js/admin/eventos/main.js', 'public/js/admin/eventos').vue()
+    .js('resources/js/admin/directorio/main.js', 'public/js/admin/directorio').vue()
 
