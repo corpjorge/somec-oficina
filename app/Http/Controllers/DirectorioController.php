@@ -10,4 +10,9 @@ class DirectorioController extends Controller
     {
         return view('directorio');
     }
+
+    public function lista()
+    {
+        return view('listaDirectorio');
+    }
 }

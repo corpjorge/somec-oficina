@@ -17,7 +17,9 @@
     <a type="button" href="{{ url('clasificados')}}" class="list-group-item list-group-item-action">Clasificados</a>
     <a type="button" href="{{ url('clasificado')}}" class="list-group-item list-group-item-action">Lista de
         clasificados</a>
-    <a type="button" href="{{ url('directorio')}}" class="list-group-item list-group-item-action">Directorio</a>
+    <a type="button" href="{{ url('directorio/nuevo')}}" class="list-group-item list-group-item-action">Directorio</a>
+    <a type="button" href="{{ url('directorio')}}" class="list-group-item list-group-item-action">Lista de
+        directorio</a>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\DirectorioController;
 use App\Http\Controllers\MunicipioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -40,7 +41,8 @@ Route::get('/departamentos-lista', [DepartamentoController::class, 'lista']);
 Route::get('/ciudades-lista/{id}', [MunicipioController::class, 'lista']);
 
 
-Route::get('/directorio', [ClasificadoController::class, 'vista']);
+Route::get('/directorio/nuevo', [DirectorioController::class, 'vista']);
+Route::get('/directorio', [DirectorioController::class, 'lista']);
 
 Route::group(['middleware' => 'auth'], function () {
 

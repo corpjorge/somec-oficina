@@ -11,7 +11,8 @@
     <title>Oficina</title>
 </head>
 <body>
-<div id="directorio"></div>
-<script src="/js/directorio/main.js"></script>
+<div id="directorioLista"></div>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<script src="/js/directorioLista/main.js"></script>
 </body>
 </html>
