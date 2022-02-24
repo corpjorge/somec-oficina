@@ -5,9 +5,9 @@ const routes = [
         path: '/',
         name: 'root',
         component: () => import('./Lista'),
-    },         
+    },
     {
-        path: '/ver/:tipo',
+        path: '/ver/:especialidad',
         name: 'Ver',
         component: () => import('./Detalle'),
     },
@@ -15,7 +15,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes     
+    routes
 })
 
 export default router

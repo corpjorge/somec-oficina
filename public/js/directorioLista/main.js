@@ -14787,7 +14787,7 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_directorioLista_Lista_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./Lista */ "./resources/js/directorioLista/Lista.vue"));
   }
 }, {
-  path: '/ver/:tipo',
+  path: '/ver/:especialidad',
   name: 'Ver',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_directorioLista_Detalle_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./Detalle */ "./resources/js/directorioLista/Detalle.vue"));

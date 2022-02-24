@@ -13,6 +13,7 @@ class Directorio extends Model
         'nombre',
         'profesion',
         'telefono',
-        'especialidad'
+        'especialidad',
+        'estado'
     ];
 }

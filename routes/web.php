@@ -41,9 +41,11 @@ Route::get('/eventos-lista', [EventoListaController::class, 'lista']);
 Route::get('/departamentos-lista', [DepartamentoController::class, 'lista']);
 Route::get('/ciudades-lista/{id}', [MunicipioController::class, 'lista']);
 
-
 Route::get('/directorio/nuevo', [DirectorioController::class, 'vista']);
 Route::get('/directorio', [DirectorioController::class, 'lista']);
+Route::post('/directorio', [DirectorioController::class, 'crear']);
+Route::get('/especialidades', [DirectorioController::class, 'listaEspecialidades']);
+Route::get('/directorios/{especialidad}', [DirectorioController::class, 'listaDirectorios']);
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -79,5 +81,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/admin/eventos/eliminar/{id}', [AdminEventoController::class, 'eliminar']);
 
     Route::get('/admin/directorio', [AdminDirectorioController::class, 'vista']);
+    Route::get('/admin/directorios/datos', [AdminDirectorioController::class, 'datos']);
+    Route::post('/admin/directorio/activar/{id}', [AdminDirectorioController::class, 'activar']);
+    Route::delete('/admin/directorio/eliminar/{id}', [AdminDirectorioController::class, 'eliminar']);
+    Route::get('/admin/especialidades', [AdminDirectorioController::class, 'todosEspecialidades']);
+    Route::post('/admin/especialidad/create', [AdminDirectorioController::class, 'crear']);
+    Route::put('/admin/especialidad/{especialidad}', [AdminDirectorioController::class, 'updateEspecialidad']);
+
 
 });

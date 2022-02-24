@@ -59,10 +59,10 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="tipo" class="col-sm-1 col-form-label">Evento:</label>
+                        <label for="evento" class="col-sm-1 col-form-label">Evento:</label>
                         <div class="col-sm-10">
                             <select class="form-select form-select-sm" :class="errors.evento ? 'is-invalid' : '' "
-                                    aria-label="oficinas" v-model="evento.evento">
+                                    aria-label="oficinas" id="evento" v-model="evento.evento">
                                 <option v-for="event in eventos" :key="event.id" :value="event.nombre">
                                     {{ event.nombre }}
                                 </option>
@@ -85,7 +85,6 @@
                         <button class="btn btn-primary" type="submit" :disabled='isDisabled'>Enviar</button>
                     </div>
                 </form>
-
             </div>
         </div>
 

@@ -16838,7 +16838,7 @@ var _hoisted_24 = {
 };
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "tipo",
+  "for": "evento",
   "class": "col-sm-1 col-form-label"
 }, "Evento:", -1
 /* HOISTED */
@@ -16936,6 +16936,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     "class": ["form-select form-select-sm", $data.errors.evento ? 'is-invalid' : ''],
     "aria-label": "oficinas",
+    id: "evento",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.evento.evento = $event;
     })

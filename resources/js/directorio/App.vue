@@ -1,26 +1,22 @@
 <template>
     <div class="col-lg-10 mx-auto p-3 py-md-5">
         <header class="d-flex align-items-center mb-2 border-bottom">
-            <h3>Clasificados</h3>
+            <h3>Directorio Profesional</h3>
         </header>
-        <p v-if="!enviando" class="fs-5 col-md-12">A través de este formulario podrá solicitar la publicación de sus
-            anuncios, llene de forma correcta los datos a continuación y
-            espere a que uno de nuestros funcionarios valide su información, si todo esta correcto se realizara la
-            publicación de su clasificado.</p>
-        <div v-else class="fs-5 col-md-12 alert alert-success" role="alert">
+        <div v-if="enviando" class="fs-5 col-md-12 alert alert-success" role="alert">
             Su solicitud ha sido enviada.
         </div>
-        <hr class="col-3 col-md-2 mb-5"/>
+
         <div class="row ">
             <div class="col-md-12">
                 <form v-if="!enviando" class="needs-validation" autocomplete="off" novalidate
-                      @submit.prevent="crearClasificado">
+                      @submit.prevent="crearDirectorio">
                     <div class="mb-3 row">
                         <label for="nombre" class="col-sm-1 col-form-label">Nombre:</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control form-control-sm"
                                    :class="errors.nombre ? 'is-invalid' : '' " id="nombre" aria-describedby="nombre"
-                                   v-model="clasificado.nombre"
+                                   v-model="directorio.nombre"
                                    @change="validarNombre"
                             >
                             <div class="invalid-feedback">{{ errors.nombre ? errors.nombre[0] : '' }}</div>
@@ -28,86 +24,36 @@
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="celular" class="col-sm-1 col-form-label">Celular:</label>
+                        <label for="telefono" class="col-sm-1 col-form-label">Teléfono:</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control form-control-sm"
-                                   :class="errors.celular ? 'is-invalid' : '' " id="celular" aria-describedby="celular"
-                                   v-model="clasificado.celular"
+                                   :class="errors.telefono ? 'is-invalid' : '' " id="telefono" aria-describedby="telefono"
+                                   v-model="directorio.telefono"
                                    @change="validarTelefono"
                             >
-                            <div class="invalid-feedback">{{ errors.celular ? errors.celular[0] : '' }}</div>
+                            <div class="invalid-feedback">{{ errors.telefono ? errors.telefono[0] : '' }}</div>
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="correo" class="col-sm-1 col-form-label">Correo:</label>
+                        <label for="profesion" class="col-sm-1 col-form-label">Profesión:</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control form-control-sm"
-                                   :class="errors.correo ? 'is-invalid' : '' " id="correo" aria-describedby="correo"
-                                   v-model="clasificado.correo">
-                            <div class="invalid-feedback">{{ errors.correo ? errors.correo[0] : '' }}</div>
+                            <input type="text" class="form-control form-control-sm"
+                                   :class="errors.profesion ? 'is-invalid' : '' " id="profesion" aria-describedby="profesion"
+                                   v-model="directorio.profesion">
+                            <div class="invalid-feedback">{{ errors.profesion ? errors.profesion[0] : '' }}</div>
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="tipo" class="col-sm-1 col-form-label">Tipo:</label>
+                        <label for="especialidad" class="col-sm-1 col-form-label">Especialidad:</label>
                         <div class="col-sm-10">
-                            <select class="form-select form-select-sm" :class="errors.tipo ? 'is-invalid' : '' "
-                                    aria-label="oficinas" v-model="clasificado.tipo">
-                                <option v-for="tipo in tipos" :key="tipo.id" :value="tipo.nombre">{{ tipo.nombre }}
+                            <select class="form-select form-select-sm" :class="errors.especialidad ? 'is-invalid' : '' "
+                                    aria-label="especialidad" v-model="directorio.especialidad" id="especialidad">
+                                <option v-for="especialidad in especialidades" :key="especialidad.id" :value="especialidad.nombre">{{ especialidad.nombre }}
                                 </option>
                             </select>
-                            <div class="invalid-feedback">{{ errors.tipo ? errors.tipo[0] : '' }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="titulo" class="col-sm-1 col-form-label">Titulo:</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control form-control-sm"
-                                   :class="errors.titulo ? 'is-invalid' : '' " id="titulo" aria-describedby="titulo"
-                                   v-model="clasificado.titulo">
-                            <div class="invalid-feedback">{{ errors.titulo ? errors.titulo[0] : '' }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="descripcion" class="col-sm-1 col-form-label">Descripción:</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control form-control-sm"
-                                      :class="errors.descripcion ? 'is-invalid' : '' " id="descripcion"
-                                      v-model="clasificado.descripcion"></textarea>
-                            <div class="invalid-feedback">{{ errors.descripcion ? errors.descripcion[0] : '' }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="archivo1" class="col-sm-1 col-form-label">Foto 1:</label>
-                        <div class="col-sm-10">
-                            <input type="file" accept=".jpg" class="form-control form-control-sm"
-                                   :class="errors.archivo1 ? 'is-invalid' : '' " aria-label="file example"
-                                   @change="archivo1">
-                            <div class="invalid-feedback">{{ errors.archivo1 ? errors.archivo1[0] : '' }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="archivo1" class="col-sm-1 col-form-label">Foto 2:</label>
-                        <div class="col-sm-10">
-                            <input type="file" accept=".jpg" class="form-control form-control-sm"
-                                   :class="errors.archivo2 ? 'is-invalid' : '' " aria-label="file example"
-                                   @change="archivo2">
-                            <div class="invalid-feedback">{{ errors.archivo2 ? errors.archivo2[0] : '' }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="archivo1" class="col-sm-1 col-form-label">Foto 3:</label>
-                        <div class="col-sm-10">
-                            <input type="file" accept=".jpg" class="form-control form-control-sm"
-                                   :class="errors.archivo3 ? 'is-invalid' : '' " aria-label="file example"
-                                   @change="archivo3">
-                            <div class="invalid-feedback">{{ errors.archivo3 ? errors.archivo3[0] : '' }}</div>
+                            <div class="invalid-feedback">{{ errors.especialidad ? errors.especialidad[0] : '' }}</div>
                         </div>
                     </div>
 
@@ -127,55 +73,32 @@ export default {
     name: 'App',
     data() {
         return {
-            clasificado: {},
+            directorio: {},
             errors: {},
             enviando: null,
-            tipos: {},
+            especialidades: {},
             isDisabled: true
         }
     },
     created() {
-        this.getClasificados()
+        this.getEspecialidades()
     },
     methods: {
-        archivo1(event) {
-            this.clasificado.archivo1 = event.target.files[0];
-        },
-        archivo2(event) {
-            this.clasificado.archivo2 = event.target.files[0]
-        },
-        archivo3(event) {
-            this.clasificado.archivo3 = event.target.files[0]
-        },
-        archivo4(event) {
-            this.clasificado.archivo4 = event.target.files[0]
-        },
-        async crearClasificado() {
-            const data = new FormData();
-            data.append('nombre', this.clasificado.nombre ? this.clasificado.nombre : '')
-            data.append('celular', this.clasificado.celular ? this.clasificado.celular : '')
-            data.append('correo', this.clasificado.correo ? this.clasificado.correo : '')
-            data.append('tipo', this.clasificado.tipo ? this.clasificado.tipo : '')
-            data.append('titulo', this.clasificado.titulo ? this.clasificado.titulo : '')
-            data.append('descripcion', this.clasificado.descripcion ? this.clasificado.descripcion : '')
-            data.append('archivo1', this.clasificado.archivo1 ? this.clasificado.archivo1 : '')
-            data.append('archivo2', this.clasificado.archivo2 ? this.clasificado.archivo2 : '')
-            data.append('archivo3', this.clasificado.archivo3 ? this.clasificado.archivo3 : '')
-
-            await axios.post('/clasificados', data).then(() => {
+        async crearDirectorio() {
+            await axios.post('/directorio', this.directorio).then(() => {
                 this.enviando = true;
             }).catch(error => {
                 this.errors = error.response.data.errors;
             })
         },
-        async getClasificados() {
-            await axios.get('/clasificados-tipo').then(response => {
-                this.tipos = response.data;
+        async getEspecialidades() {
+            await axios.get('/especialidades').then(response => {
+                this.especialidades = response.data;
             })
         },
         validarNombre() {
             let regex = /(\d+)/g;
-            if (this.clasificado.nombre.match(regex)) {
+            if (this.directorio.nombre.match(regex)) {
                 this.errors = {nombre: {0: 'El nombre no puede tener números'}}
                 return this.isDisabled = true;
             }
@@ -183,16 +106,24 @@ export default {
             return this.isDisabled = false;
         },
         validarTelefono() {
-            if (isNaN(this.clasificado.celular)) {
-                this.errors = {celular: {0: 'El Celular solo puede ser numérico'}}
-                return this.isDisabled = true
-            }
-            if (this.clasificado.celular.length !== 10) {
-                this.errors = {celular: {0: 'El celular debe contener 10 números'}}
+
+            if (isNaN(this.directorio.telefono)) {
+                this.errors = {telefono: {0: 'El Celular solo puede ser numérico'}}
                 return this.isDisabled = true
             }
 
-            this.errors = {celular: false}
+            if (this.directorio.telefono.length < 7 ) {
+                console.log(this.directorio.telefono.length);
+                this.errors = {telefono: {0: 'Numero incorrecto'}}
+                return this.isDisabled = true
+            }
+
+            if (this.directorio.telefono.length > 10 ) {
+                this.errors = {telefono: {0: 'Numero incorrecto'}}
+                return this.isDisabled = true
+            }
+
+            this.errors = {telefono: false}
             return this.isDisabled = false;
         },
 

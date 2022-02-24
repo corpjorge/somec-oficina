@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDirectoriosTable extends Migration
+class CreateEspecialidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateDirectoriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('directorios', function (Blueprint $table) {
+        Schema::create('especialidades', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('profesion');
-            $table->string('telefono');
-            $table->string('especialidad');
             $table->string('estado')->nullable();
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ class CreateDirectoriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('directorios');
+        Schema::dropIfExists('especialidades');
     }
 }

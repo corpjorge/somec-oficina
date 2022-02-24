@@ -1869,15 +1869,15 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
   name: 'Lista',
   data: function data() {
     return {
-      tipos: {},
+      especialidades: {},
       shadow: 'shadow'
     };
   },
   created: function created() {
-    this.getTipo();
+    this.getEspecialidad();
   },
   methods: {
-    getTipo: function getTipo() {
+    getEspecialidad: function getEspecialidad() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -1886,8 +1886,8 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/clasificados-tipo').then(function (response) {
-                  _this.tipos = response.data;
+                return axios.get('/especialidades').then(function (response) {
+                  _this.especialidades = response.data;
                 });
 
               case 2:
@@ -1899,12 +1899,12 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       }))();
     },
     hoverOver: function hoverOver(id) {
-      var element = document.getElementById("clasificado" + id);
+      var element = document.getElementById("especialidad" + id);
       element.classList.remove("shadow");
       element.classList.add("shadow-lg");
     },
     hoverLeave: function hoverLeave(id) {
-      var element = document.getElementById("clasificado" + id);
+      var element = document.getElementById("especialidad" + id);
       element.classList.remove("shadow-lg");
       element.classList.add("shadow");
     }
@@ -1932,7 +1932,7 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "fs-5 col-md-12"
-}, "Elegia la categoría de clasificados que desea consultar", -1
+}, "Elija la especialidad a consultar", -1
 /* HOISTED */
 );
 
@@ -1957,9 +1957,9 @@ var _hoisted_7 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.tipos, function (tipo) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.especialidades, function (especialidad) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
-      key: tipo.id,
+      key: especialidad.id,
       style: {
         "text-decoration": "none"
       },
@@ -1967,21 +1967,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       to: {
         name: 'Ver',
         params: {
-          tipo: tipo.nombre
+          especialidad: especialidad.nombre
         }
       }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
           "class": "text-center shadow p-3 mb-5 bg-body rounded",
-          id: 'clasificado' + tipo.id,
+          id: 'especialidad' + especialidad.id,
           onMouseover: function onMouseover($event) {
-            return $options.hoverOver(tipo.id);
+            return $options.hoverOver(especialidad.id);
           },
           onMouseleave: function onMouseleave($event) {
-            return $options.hoverLeave(tipo.id);
+            return $options.hoverLeave(especialidad.id);
           }
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tipo.nombre), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(especialidad.nombre), 1
         /* TEXT */
         )], 40
         /* PROPS, HYDRATE_EVENTS */
